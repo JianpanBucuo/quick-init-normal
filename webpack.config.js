@@ -1,7 +1,7 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
-    entry:'./src/class1/jqeury.js',
+    entry:'./src/index.js',
     output:{
         filename:'[name].js',
         path: path.resolve(__dirname, 'dist'),
@@ -15,6 +15,13 @@ module.exports = {
                 test: /\.js$/, 
                 exclude: /node_modules/, 
                 loader: 'babel-loader'
+            },
+           {
+                 test: /\.css$/,
+                 use: [
+                   'style-loader',
+                   'css-loader'
+                 ]
             }
         ]
      },
