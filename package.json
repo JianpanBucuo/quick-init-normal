@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --config webpack.config.js --mode=development",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "start2":"http-server dist"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.1",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.12.0",
     "style-loader": "^1.0.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
