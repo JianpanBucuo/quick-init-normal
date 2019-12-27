@@ -187,6 +187,36 @@ webpack.config.js 增加
         })
     ]
 ```
+### 支持装饰语法
+
+安装 (npm install --save-dev)
+
+- @babel/plugin-proposal-decorators
+
+babel.config.js里增加
+
+```js
+const presets = [
+  [
+    "@babel/env",
+    {
+      targets: {
+        edge: "17",
+        firefox: "60",
+        chrome: "67",
+        safari: "11.1",
+      },
+      useBuiltIns: "usage",
+    },
+  ],
+];
+const plugins = [
+  ["@babel/plugin-proposal-decorators", { "legacy": true }]
+]
+module.exports = { presets,plugins }
+```
+
+在VSCode里搜索experimentalDecorators, settings.json中设置javascript.implicitProjectConfig.experimentalDecorators为true
 
 ### 支持Typescript
 
