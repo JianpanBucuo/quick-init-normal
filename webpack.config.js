@@ -2,7 +2,10 @@ const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin') 
 module.exports = {
-    entry:'./src/index.js',
+    entry:{
+        index:'./src/index.js',
+        header: './src/header.js'
+    },
     output:{
         filename:'[name].js',
         path: path.resolve(__dirname, 'dist'),
@@ -21,7 +24,8 @@ module.exports = {
                  test: /\.css$/,
                  use: [
                    'style-loader',
-                   'css-loader'
+                   'css-loader',
+                   'postcss-loader'
                  ]
             },
             {
@@ -29,7 +33,8 @@ module.exports = {
                 use: [
                   'style-loader',
                   'css-loader',
-                  "sass-loader"
+                  'sass-loader',
+                  'postcss-loader'
                 ]
            }
         ]
@@ -37,7 +42,14 @@ module.exports = {
     plugins:[
         new CleanWebpackPlugin(),
         new htmlWebpackPlugin({
-            template: './src/index.html'
+            template:'./src/index.html',
+            filename:'index.html',
+            chunks:['index'] // 与入口文件对应的模块名
         }),
+        new htmlWebpackPlugin({
+            template:'./src/header.html',
+            filename:'header.html',
+            chunks:['header'] // 与入口文件对应的模块名
+        })
     ]
 }
