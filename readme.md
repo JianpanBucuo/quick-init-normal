@@ -109,6 +109,19 @@ module.exports = {
 -   @babel/preset-env 
 -   babel-loader 
 
+webpack.config.js里配置
+```js
+     module:{
+        rules:[
+            {
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                loader: 'babel-loader'
+            },
+        ]
+    }
+```
+
 增加 babel.config.js
 ```js
 const presets = [
@@ -173,4 +186,36 @@ webpack.config.js 增加
             chunks:['header'] // 与入口文件对应的模块名
         })
     ]
+```
+
+### 支持Typescript
+
+安装 (npm install --save-dev)
+
+- typescript ts-loader
+
+webpack.config.js里增加
+```js
+    module:{
+        rules:[
+            {
+                test: /\.ts?$/,
+                use: 'ts-loader',
+                exclude:'/node_modules/'
+            }
+        ]
+    }
+```
+
+增加 tsconfig.json
+```js
+{
+    "compilerOptions": {
+        "outDir":"./dist",
+        "module": "es6",
+        "target": "es5",
+        "allowJs": true,
+        "experimentalDecorators": true
+    }
+}
 ```
