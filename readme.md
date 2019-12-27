@@ -22,7 +22,7 @@ module:{
     ]
 }
 ```
-### css添加浏览器前缀 postcss-loader
+### css添加浏览器前缀
 安装 (npm install --save-dev)
 - postcss-loader 
 - autoprefixer 
