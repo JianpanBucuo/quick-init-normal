@@ -26,6 +26,7 @@ module:{
 安装 (npm install --save-dev)
 - postcss-loader 
 - autoprefixer 
+
 webpack.config.js里添加
 ```js
 module:{
@@ -52,12 +53,54 @@ module:{
 ```
 增加 postcss.config.js
 ```js
+
 module.exports = {
     plugins:[
         require("autoprefixer")
     ]
 }
 ```
+或者直接在webpack.config.js里添加(不需再 postcss.config.js里配置)
+```js
+    rules:[{
+        test:/\.less$/,
+        use:['style-loader','css-loader',{
+            loader:'postcss-loader',
+            options:{
+                plugins:[require('autoprefixer')]
+            }
+        },'less-loader'] // 从右向左解析原则
+    }]
+
+```
+### 将css从js文件中分离出来
+安装 (npm install --save-dev)
+- mini-css-extract-plugin
+
+它为每个包含css的js文件都创建一个css文件
+
+修改webpack.config.js
+```js
+    module:{
+        rules: [
+        {
+            test: /\.scss$/,
+            use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'less-loader'
+            ],
+        }
+        ]
+    }
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].[hash].css",
+            chunkFilename: "[id].css",
+        })
+    ]
+```
+
 ### 支持 es6语法
 安装 (npm install --save-dev)
 -   @babel/cli 
@@ -65,6 +108,7 @@ module.exports = {
 -   @babel/polyfill 
 -   @babel/preset-env 
 -   babel-loader 
+
 增加 babel.config.js
 ```js
 const presets = [
@@ -86,7 +130,6 @@ module.exports = { presets };
 ```
 
 ### 清理dist文件夹
-
 - clean-webpack-plugin
 
 webpack.config.js 增加
@@ -110,6 +153,7 @@ webpack.config.js 增加
 
 ### 多入口文件开发
 - html-webpack-plugin
+
 在htmlWebpackPlugin里配置对应 html模板对应的入口文件
 ```js
     entry:{

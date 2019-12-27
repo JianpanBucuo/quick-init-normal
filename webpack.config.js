@@ -1,6 +1,7 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin') 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 module.exports = {
     entry:{
         index:'./src/index.js',
@@ -23,7 +24,7 @@ module.exports = {
            {
                  test: /\.css$/,
                  use: [
-                   'style-loader',
+                    MiniCssExtractPlugin,
                    'css-loader',
                    'postcss-loader'
                  ]
@@ -31,7 +32,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                  'style-loader',
+                    MiniCssExtractPlugin.loader,
                   'css-loader',
                   'sass-loader',
                   'postcss-loader'
@@ -50,6 +51,10 @@ module.exports = {
             template:'./src/header.html',
             filename:'header.html',
             chunks:['header'] // 与入口文件对应的模块名
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css",
         })
     ]
 }
