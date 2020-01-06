@@ -128,6 +128,7 @@ const presets = [
   [
     "@babel/env",
     {
+      modules: "commonjs", //支持commonjs语法
       targets: {
         edge: "17",
         firefox: "60",

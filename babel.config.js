@@ -2,6 +2,7 @@ const presets = [
   [
     "@babel/env",
     {
+      modules: "commonjs",
       targets: {
         edge: "17",
         firefox: "60",
