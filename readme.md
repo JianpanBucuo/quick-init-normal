@@ -179,12 +179,12 @@ webpack.config.js 增加
         new htmlWebpackPlugin({
             template:'./src/index.html',
             filename:'index.html',
-            chunks:['index'] // 与入口文件对应的模块名
+            chunks:['index'] //  与入口文件对应的模块名 如不指定则引入所有 entry入口js文件
         }),
         new htmlWebpackPlugin({
             template:'./src/header.html',
             filename:'header.html',
-            chunks:['header'] // 与入口文件对应的模块名
+            chunks:['header'] //  与入口文件对应的模块名 如不指定则引入所有 entry入口js文件
         })
     ]
 ```
@@ -212,7 +212,7 @@ const presets = [
   ],
 ];
 const plugins = [
-  ["@babel/plugin-proposal-decorators", { "legacy": true }]
+  ["@babel/plugin-proposal-decorators", { "legacy": true }] //增加这里
 ]
 module.exports = { presets,plugins }
 ```
@@ -248,5 +248,40 @@ webpack.config.js里增加
         "allowJs": true,
         "experimentalDecorators": true
     }
+}
+```
+
+### HappyPackPlugin
+
+HappyPackPlugin通过把任务分解为多个子进程，使loader平行编译，加速打包速度
+
+安装 (npm install --save-dev)
+
+- happypack
+
+```js
+
+const HappyPack = require('happypack')
+module.exports = {
+     module:{
+        rules:[
+            {
+                test: /\.js$/, 
+                exclude: /node_modules/, 
+                // loader: 'babel-loader'
+                use: 'happypack/loader?id=jsx' //id为唯一标识， 对应 插件 happyPack里的 id
+            },
+        ]
+     },
+     plugins:[
+        new HappyPack({
+            id: 'jsx',
+            threads: 4,
+            loaders: [ 'babel-loader' ]
+        })
+     ]
+// threads: Number 代表开启几个子进程去处理这一类型的文件，默认是3个，类型必须是整数。
+// verbose: Boolean 是否允许 HappyPack 输出日志，默认是 true。
+//threadPool: HappyThreadPool 代表共享进程池，即多个 HappyPack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多。
 }
 ```
