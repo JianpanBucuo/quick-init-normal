@@ -294,9 +294,12 @@ module.exports = {
 - webpack-merge
 
 ```js
-// webpack.common.js编写 公共配置
+// webpack.common.js
+//编写 公共配置
 // 详见 build/webpack.common.js
-// webpack.prod.js编写 生产环境独有的配置 并通过webpack-merge 合并 webpack.common.js里的公共配置
+
+// webpack.prod.js
+//编写 生产环境独有的配置 并通过webpack-merge 合并 webpack.common.js里的公共配置
 const merge = require('webpack-merge')
 const common = require('./webpack.common')
 
@@ -307,7 +310,9 @@ module.exports = merge(common,{
         contentBase:'./dist',
     }
 })
-// webpack.dev.js 编写 系统环境独有的配置 并通过webpack-merge 合并 webpack.common.js里的公共配置
+
+// webpack.dev.js 
+//编写 系统环境独有的配置 并通过webpack-merge 合并 webpack.common.js里的公共配置
 const merge = require('webpack-merge')
 const common = require('./webpack.common')
 
