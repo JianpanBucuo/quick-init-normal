@@ -13,6 +13,7 @@ module.exports = {
     output:{
         filename:'[name]/js/[name].js',
         path: path.resolve(__dirname, '../dist'),
+        
         // publicPath:''
     },
 
@@ -23,7 +24,32 @@ module.exports = {
                 exclude: /node_modules/, 
                 use: 'happypack/loader?id=jsx'
             },
- 
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 1,
+                      name: '[name].[ext]',
+                      outputPath: 'images/',
+                    //   publicPath:'assets',
+                    //   publicPath: (url, resourcePath, context) => {
+                    //     // `resourcePath` is original absolute path to asset
+                    //     // `context` is directory where stored asset (`rootContext`) or `context` option
+             
+                    //     // To get relative path you can use
+                    //     // const relativePath = path.relative(context, resourcePath);
+             
+                    //     console.log('url:',url)
+                    //     console.log('resourcePath',resourcePath)
+                    //     console.log('context',context)
+                    //     return `public_path/${url}`;
+                    //   },
+                    }
+                  }
+                ]
+              },
             {
                 test: /\.(css|scss)$/,
                 use: [

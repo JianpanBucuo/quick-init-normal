@@ -24,7 +24,17 @@ module.exports = {
                 exclude: /node_modules/, 
                 use: 'happypack/loader?id=jsx'
             },
- 
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192
+                    }
+                  }
+                ]
+              },
             {
                 test: /\.(css|scss)$/,
                 use: [

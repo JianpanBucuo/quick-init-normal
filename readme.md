@@ -1,5 +1,28 @@
 ## 自用脚手架工具 个人搭建
 
+### 支持图片
+安装 (npm install --save-dev)
+- url-loader file-loader
+```js
+module:{
+    rules:[
+        {
+            test: /\.(png|jpg|gif)$/,
+            use: [
+                {
+                loader: 'url-loader',
+                options: {
+                      limit: 1024, //当图片大小小于 1imit值时，会使图片转换成dataurl
+                      name: '[name].[ext]',
+                      outputPath: 'images/' //将图片放到 images文件夹下
+                }
+                }
+            ]
+            }
+    ]
+}
+```
+
 ### 支持 css
 安装 (npm install --save-dev)
 - style-loader 
