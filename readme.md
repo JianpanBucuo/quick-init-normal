@@ -257,10 +257,11 @@ HappyPackPlugin通过把任务分解为多个子进程，使loader平行编译�
 
 安装 (npm install --save-dev)
 
+https://github.com/amireh/happypack
+
 - happypack
 
 ```js
-
 const HappyPack = require('happypack')
 module.exports = {
      module:{
@@ -284,4 +285,33 @@ module.exports = {
 // verbose: Boolean 是否允许 HappyPack 输出日志，默认是 true。
 //threadPool: HappyThreadPool 代表共享进程池，即多个 HappyPack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多。
 }
+```
+
+### 生产环境开发模式构建分离
+
+安装 (npm install --save-dev)
+
+- webpack-merge
+
+```js
+// webpack.common.js编写 公共配置
+// 详见 build/webpack.common.js
+// webpack.prod.js编写 生产环境独有的配置 并通过webpack-merge 合并 webpack.common.js里的公共配置
+const merge = require('webpack-merge')
+const common = require('./webpack.common')
+
+module.exports = merge(common,{
+    mode: 'development',
+    devtool: 'inline-source-map',
+    devServer:{
+        contentBase:'./dist',
+    }
+})
+// webpack.dev.js 编写 系统环境独有的配置 并通过webpack-merge 合并 webpack.common.js里的公共配置
+const merge = require('webpack-merge')
+const common = require('./webpack.common')
+
+module.exports = merge(common, {
+    mode: 'production'
+})
 ```
